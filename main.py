@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Response, jsonify, request
 from Frontend.camera import VideoCamera
+from Frontend import text2speech
 
 
 app = Flask(__name__,
@@ -10,9 +11,11 @@ app = Flask(__name__,
 video_camera = None
 global_frame = None
 
+
 @app.route('/')
 def hello():
-    return "Hello World!"
+    text2speech.main()
+    return render_template('home.html')
 
 @app.route('/frontend')
 def frontend():

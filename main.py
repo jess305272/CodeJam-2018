@@ -4,13 +4,12 @@ app = Flask(__name__,
             static_folder = './Frontend/static/css'
             )
 
-
-import os
-from Frontend import camera
+from Frontend import text2speech
 
 @app.route('/')
 def hello():
-    return "Hello World!"
+    text2speech.main()
+    return render_template('home.html')
 
 @app.route('/frontend')
 def frontend():

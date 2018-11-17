@@ -50,11 +50,23 @@
 
 <!--Main Body-->
 <div class="container main-div">
+
+    <img id="video" src="{{ url_for('video_viewer') }}">
+    <div id="recorder">
+        <button id="record">Record</button>
+        <button id="stop">Stop</button>
+        <a id="download"></a>
+        <script type="text/javascript" src="{{ url_for('static', filename='recorder.js') }}"></script>
+    </div>
+
     <button type="button" class="btn btn-primary btn-lg">First button</button>
     <button type="button" class="btn btn-primary btn-lg">Second button</button>
     <button type="button" class="btn btn-primary btn-lg">Third button</button>
 </div>
 
+<div class="container tts">
+
+</div>
 
 
 </body>

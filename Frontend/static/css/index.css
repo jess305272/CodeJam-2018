@@ -1,3 +1,11 @@
 .main-div {
-    margin-top: 2em;
+    margin: 2em auto;
+}
+
+#video {
+    margin: auto;
+}
+
+#recorder {
+    margin: 2em auto;
 }

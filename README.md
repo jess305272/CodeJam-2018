@@ -1,8 +1,8 @@
 # CodeJam-2018
 
 To run flask:
-(If you don't have Flask installed:
-*  pip install Flask
+
+*  pip install Flask (if you don't have Flask installed)
 
 * For Windows:
     * $ set FLASK_APP=hello.py
@@ -11,4 +11,4 @@ To run flask:
     * $ export FLASK_APP=hello.py
     * $ flask run
 
-Access the application at 127.0.0.:5000 or localhost:5000
+Access the application at 127.0.0.1:5000 or localhost:5000

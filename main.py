@@ -14,12 +14,12 @@ global_frame = None
 
 @app.route('/')
 def hello():
-    text2speech.main()
-    return render_template('home.html')
-
-@app.route('/frontend')
-def frontend():
+    # text2speech.main()
     return render_template('index.html')
+
+# @app.route('/frontend')
+# def frontend():
+#     return render_template('index.html')
 
 @app.route('/backend')
 def backend():

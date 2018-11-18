@@ -1,6 +1,6 @@
 from flask import Flask, render_template, Response, jsonify, request
 from Frontend.camera import VideoCamera
-from Frontend import text2speech
+import Frontend.text2speech as myTTS
 from pygame import mixer
 
 try:
@@ -16,6 +16,8 @@ app = Flask(__name__,
 video_camera = None
 global_frame = None
 
+import os
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'C:\Google\codejam-2018-43e63ace5e4e.json'
 
 @app.route('/')
 def hello():
@@ -25,8 +27,8 @@ def hello():
 @app.route('/text2speech', methods=['POST'])
 def text2speech():
 	text = request.form.get('text', 'No text')
-	speech = text2speech.getSpeech(text)
-	text2speech.saveMp3(speech, 'output')
+	speech = myTTS.getSpeech(text)
+	myTTS.saveMp3(speech, 'output')
 
 	mixer.init()
 	mixer.music.load('output.mp3')

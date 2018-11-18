@@ -1,6 +1,12 @@
 from flask import Flask, render_template, Response, jsonify, request
 from Frontend.camera import VideoCamera
 from Frontend import text2speech
+from pygame import mixer
+
+try:
+    import cv2
+except ImportError:
+    cv2 = None
 
 app = Flask(__name__,
             template_folder='./Frontend/templates',
@@ -18,8 +24,14 @@ def hello():
 
 @app.route('/text2speech', methods=['POST'])
 def text2speech():
+
     text = request.form.get('text', 'No text')
-    print(text)
+    speech = text2speech.getSpeech(text)
+    text2speech.saveMp3(speech, 'output')
+
+    mixer.init()
+    mixer.music.load('output.mp3')
+    mixer.music.play()
     # return text
     return render_template('home.html')
 
@@ -37,20 +49,25 @@ def backend():
 def record_status():
     global video_camera
 
-    if video_camera == None:
-        video_camera = VideoCamera()
+    if cv2:
 
-    json = request.get_json()
+        if video_camera == None:
+            video_camera = VideoCamera()
 
-    status = json['status']  # if video_camera is None:
-    # 	return
+        json = request.get_json()
 
-    if status == "true":
-        video_camera.start_record()
-        return jsonify(result="started")
-    else:
-        video_camera.stop_record()
-        return jsonify(result="stopped")
+        status = json['status']
+
+        if video_camera is None:
+            return
+
+        if status == "true":
+            video_camera.start_record()
+            return jsonify(result="started")
+        else:
+            video_camera.stop_record()
+            return jsonify(result="stopped")
+
 
 
 @app.route('/video_stream')
@@ -58,23 +75,25 @@ def video_stream():
     global video_camera
     global global_frame
 
-    if video_camera == None:
-        video_camera = VideoCamera()
+    if cv2:
 
-    while True:
+        if video_camera == None:
+            video_camera = VideoCamera()
 
-        # if video_camera is None:
-        #     return
+        while True:
 
-        frame = video_camera.get_frame()
+            if video_camera is None:
+                return
 
-        if frame != None:
-            global_frame = frame
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
-        else:
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + global_frame + b'\r\n\r\n')
+            frame = video_camera.get_frame()
+
+            if frame != None:
+                global_frame = frame
+                yield (b'--frame\r\n'
+                       b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+            else:
+                yield (b'--frame\r\n'
+                       b'Content-Type: image/jpeg\r\n\r\n' + global_frame + b'\r\n\r\n')
 
 
 @app.route('/video_viewer')

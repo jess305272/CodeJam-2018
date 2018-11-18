@@ -18,12 +18,20 @@ def getSpeech(myText):
 	return response
 
 
+def getMp3(response):
+	return response.audio_content
+
+
+def saveMp3(response, filename='output', dir='.'):
+	with open('%s/%s.mp3' % (dir, filename), 'wb') as mp3File:
+		mp3File.write(getMp3(response))
+
+
+
 def main():
 	myText = 'Hello world!'
 	response = getSpeech(myText)
-
-	with open('ourput.mp3', 'wb') as outFile:
-		outFile.write(response.audio_content)
+	saveMp3(response)
 
 
 if __name__ == '__main__':

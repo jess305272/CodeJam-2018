@@ -1,6 +1,6 @@
 from flask import Flask, render_template, Response, jsonify, request
 from Frontend.camera import VideoCamera
-import simpleaudio as sa
+from pygame import mixer
 
 import Frontend.text2speech as myTTS
 
@@ -25,21 +25,18 @@ def hello():
 	return render_template('home.html')
 
 
-@app.route('/', methods=['POST'])
+@app.route('/text2speech', methods=['POST'])
 def text2speech():
-
 	text = request.form.get('text', 'No text')
 	speech = myTTS.getSpeech(text)
-	audioData = myTTS.getMp3(speech)
-	playObj = sa.play_buffer(audioData, 2, 2, 44100)
-	playObj.wait_done()
+	myTTS.saveMp3(speech, 'output')
 
-	# myTTS.saveMp3(speech, 'output.mp3')
-	with open('output.mp3', 'rb'):
-		playObj = sa.play_buffer(audioData, 2, 2, 44100)
-		playObj.wait_done()
+	mixer.init()
+	mixer.music.load('output.mp3')
+	mixer.music.play()
+	# return text
 	return render_template('home.html')
-	# return
+
 
 # @app.route('/frontend')
 # def frontend():

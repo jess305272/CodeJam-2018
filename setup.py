@@ -4,7 +4,7 @@ import Frontend
 
 
 setup (
-    name='Frontend',
+    name='Frontend + Backend',
     packages=['Frontend', 'Backend'],
     include_package_data=True,
     install_requires=[

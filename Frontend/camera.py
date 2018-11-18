@@ -1,4 +1,7 @@
-import cv2
+try:
+    import cv2
+except ImportError:
+    cv2 = None
 import threading
 
 
@@ -60,7 +63,7 @@ class VideoCamera(object):
             # else:
             #     if self.out != None:
             #         self.out.release()
-            #         self.out = None  
+            #         self.out = None
 
             return jpeg.tobytes()
 

@@ -1,5 +1,7 @@
-from google.cloud import texttospeech
-
+try:
+	from google.cloud import texttospeech
+except:
+	texttospeech = None
 
 import os
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'codejam-2018-43e63ace5e4e.json'

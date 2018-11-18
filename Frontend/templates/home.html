@@ -1,22 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Home</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/superhero/bootstrap.min.css">
+    <title>Index</title>
+
+    <!--<link rel="shortcut icon" href="">-->
+    <!-- Bootswatch Superhero Theme CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/superhero/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+            crossorigin="anonymous"></script>
+
 </head>
-
 <body>
-<div class="input-group">
-  <div class="input-group-prepend">
-    <span class="input-group-text">With textarea</span>
+
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
   </div>
-  <textarea class="form-control" aria-label="With textarea"></textarea>
+</nav>
+
+<!--Main Body-->
+<div class="container main-div">
+
+    <img id="video" src="{{ url_for('video_viewer') }}">
+    <div id="recorder">
+        <button id="record">Record</button>
+        <button id="stop">Stop</button>
+        <a id="download"></a>
+        <script type="text/javascript" src="{{ url_for('static', filename='recorder.js') }}"></script>
+    </div>
+
+    <button type="button" class="btn btn-primary btn-lg">First button</button>
+    <button type="button" class="btn btn-primary btn-lg">Second button</button>
 </div>
 
-<button type="button" class="btn btn-primary btn-lg">Speak</button>
+<div class="container tts">
+    <form class="form-group" action='text2speech' method="POST">
+        <label for="comment">Text-to-Speech:</label>
+        <input type="text" name="text" id="comment" class="form-control">
+        <input type="submit" value="Speak" class="btn btn-primary btn-lg">
+    </form>
+</div>
 
+<div class="container audio">
+    <audio controls>
+        <source src="horse.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+</div>
 
 
 </body>

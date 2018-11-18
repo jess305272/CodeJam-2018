@@ -26,7 +26,7 @@
 
 <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">Eclipse et Chill</a>
+  <a class="navbar-brand" href="#">Aid Eye</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -59,6 +59,18 @@
     <img id="video" src="{{ url_for('video_viewer') }}">
     <div id="recorder">
         <button type="button" class="btn btn-primary btn-lg" id="snapshot">What's happening?</button>
+        <!--<form action="/snapshot_status" method="post">-->
+            <!--<input type="submit" value="What's Happening?" class="btn btn-primary btn-lg" id="snapshot">-->
+        <!--</form>-->
+
+        <form action="/upload" method="post" enctype="multipart/form-data" >
+            <span class="btn btn-default btn-file">
+              Browse <input type="file" name="image">
+            </span>
+
+          <input type="submit" value="Upload your image" class="btn btn-secondary btn-lg">
+        </form>
+
         <!--<button type="button" class="btn btn-primary btn-lg" id="record">Record</button>-->
         <!--<button type="button" class="btn btn-primary btn-lg" id="stop">Stop</button>-->
         <!--<a id="download"></a>-->
@@ -69,8 +81,8 @@
 
 <div class="container tts">
     <form class="form-group" action="" method="POST">
-        <!--<label for="comment">Text-to-Speech:</label>-->
-        <input type="text" name="text" id="comment" class="form-control">
+        <label for="comment">Text-to-Speech:</label>
+        <input type="text" name="text" id="comment" class="form-control" value="{{ caption }}">
         <input type="submit" value="Speak" class="btn btn-primary btn-lg speak">
     </form>
 </div>

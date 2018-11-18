@@ -205,3 +205,6 @@ fabric.properties
 # files
 *.mp3
 *.png
+
+# weights folder
+weights/

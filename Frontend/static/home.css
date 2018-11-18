@@ -26,6 +26,10 @@ nav {
     margin-right: 1em;
 }
 
+#snapshot {
+    margin-bottom: 1.5em;
+}
+
 input.speak {
     margin: 1em 0;
 }

@@ -115,6 +115,8 @@ elevatorMusic = os.listdir('elevator')
 def snapshot_status():
     print('ran snapshot_status')
     global video_camera
+    caption = 'default caption'
+    result = 'default result'
 
     if cv2:
 
@@ -142,6 +144,7 @@ def snapshot_status():
             if AIModel is None:
                 AIModel = ImageCaption()
             caption = AIModel.predict_captions(frameName)
+            result = caption
 
             # run text-to-speech
             audioTime = time.time()
@@ -154,7 +157,9 @@ def snapshot_status():
             mixer.music.play()
             print('Time: %d' % (audioTime - frameTime))
 
-    return render_template('home.html')
+            print(result)
+
+    return render_template('home.html', caption=result)
 
 
 @app.route('/video_viewer')
@@ -175,6 +180,34 @@ def predict():
     caption = AIModel.predict_captions('./test.png')
 
     return render_template('result.html', caption=caption)
+
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    global AIModel
+    if AIModel is None:
+        AIModel = ImageCaption()
+
+    file = request.files['image']
+
+    file.save('./test.png')
+
+    caption = AIModel.predict_captions('./test.png')
+
+
+    # run text-to-speech
+    audioTime = time.time()
+    audioName = 'audios/audio%d.mp3' % audioTime
+    speech = myTTS.getSpeech(caption)
+    myTTS.saveMp3(speech, audioName)
+
+    mixer.init()
+    mixer.music.load(audioName)
+    mixer.music.play()
+    # print('Time: %d' % (audioTime - frameTime))
+
+
+    return render_template('home.html', caption=caption)
 
 
 if __name__ == '__main__':

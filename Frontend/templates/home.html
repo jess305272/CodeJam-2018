@@ -47,8 +47,8 @@
       <!--</li>-->
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      <!--<input class="form-control mr-sm-2" type="text" placeholder="Search">-->
+      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Help</button>
     </form>
   </div>
 </nav>
@@ -58,7 +58,7 @@
 
     <img id="video" src="{{ url_for('video_viewer') }}">
     <div id="recorder">
-        <button type="button" class="btn btn-primary btn-lg" id="snapshot">Take a Snapshot</button>
+        <button type="button" class="btn btn-primary btn-lg" id="snapshot">What's happening?</button>
         <!--<button type="button" class="btn btn-primary btn-lg" id="record">Record</button>-->
         <!--<button type="button" class="btn btn-primary btn-lg" id="stop">Stop</button>-->
         <!--<a id="download"></a>-->
@@ -69,7 +69,7 @@
 
 <div class="container tts">
     <form class="form-group" action="" method="POST">
-        <label for="comment">Text-to-Speech:</label>
+        <!--<label for="comment">Text-to-Speech:</label>-->
         <input type="text" name="text" id="comment" class="form-control">
         <input type="submit" value="Speak" class="btn btn-primary btn-lg speak">
     </form>

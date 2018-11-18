@@ -4,6 +4,9 @@ var buttonSnapshot = document.getElementById("snapshot");
 var buttonRecord = document.getElementById("record");
 var buttonStop = document.getElementById("stop");
 
+ console.log(buttonSnapshot);
+ console.log(buttonRecord);
+ console.log(buttonStop);
 //buttonStop.disabled = true;
 
 buttonSnapshot.onclick = function() {
@@ -16,6 +19,7 @@ buttonSnapshot.onclick = function() {
     xhr.open("POST", "/snapshot_status");
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify({ status: "true" }));
+    console.log('buttonSnapshot.onclick ran');
 }
 
 buttonRecord.onclick = function() {

@@ -201,3 +201,7 @@ fabric.properties
 # Google API
 *.json
 .json
+
+# files
+*.mp3
+*.png

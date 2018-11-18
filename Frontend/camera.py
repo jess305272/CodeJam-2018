@@ -82,4 +82,5 @@ class VideoCamera(object):
             self.recordingThread.stop()
 
     def take_snapshot(self):
-        pass
+        ret, frame = self.cap.read()
+        return frame

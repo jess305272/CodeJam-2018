@@ -25,7 +25,7 @@ def hello():
 	return render_template('home.html')
 
 
-@app.route('/text2speech', methods=['POST'])
+@app.route('/', methods=['POST'])
 def text2speech():
 	text = request.form.get('text', 'No text')
 	speech = myTTS.getSpeech(text)

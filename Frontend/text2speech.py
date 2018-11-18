@@ -3,8 +3,6 @@ try:
 except:
 	texttospeech = None
 
-
-
 def getSpeech(myText):
 	myClient = texttospeech.TextToSpeechClient()
 	textInput = texttospeech.types.SynthesisInput(text=myText)

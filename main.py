@@ -17,6 +17,8 @@ app = Flask(__name__,
 video_camera = None
 global_frame = None
 
+import os
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'C:\Google\codejam-2018-43e63ace5e4e.json'
 
 @app.route('/')
 def hello():

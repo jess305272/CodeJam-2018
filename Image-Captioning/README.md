@@ -4,7 +4,8 @@
 * conda env create environment.yml 
 * if above not work, just make sure you have this: 
 	keras==1.2.2
-	tensorflow 
+	tensorflow
+	tqdm
 
 ### usage
 * python "Image Captioning InceptionV3.py"

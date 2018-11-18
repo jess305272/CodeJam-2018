@@ -11,7 +11,7 @@ except ImportError:
 
 app = Flask(__name__,
             template_folder='./Frontend/templates',
-            static_folder='./Frontend/static/css'
+            static_folder='./Frontend/static'
             )
 
 video_camera = None
@@ -55,6 +55,8 @@ def backend():
 def record_status():
 	global video_camera
 
+	print('reached record_status')
+
 	if cv2:
 
 		if video_camera == None:
@@ -64,14 +66,18 @@ def record_status():
 
 		status = json['status']
 
+		print('so far so good')
+
 		if video_camera is None:
 			return
 
 		if status == "true":
 			video_camera.start_record()
+			print('start_record')
 			return jsonify(result="started")
 		else:
 			video_camera.stop_record()
+			print('stop_record')
 			return jsonify(result="stopped")
 
 
@@ -99,6 +105,32 @@ def video_stream():
 			else:
 				yield (b'--frame\r\n'
 				       b'Content-Type: image/jpeg\r\n\r\n' + global_frame + b'\r\n\r\n')
+
+
+@app.route('/snapshot_status')
+def snapshot_status():
+	print('ran snapshot_status')
+	img_counter = 0
+
+	global video_camera
+	global global_frame
+
+	if cv2:
+
+		if video_camera == None:
+			video_camera = VideoCamera()
+
+		json = request.get_json()
+
+		status = json['status']
+
+		if video_camera is None:
+			return
+
+		if status == "true":
+			cv2.imwrite('frame.png', global_frame)
+			print('picture taken')
+			img_counter += 1
 
 
 @app.route('/video_viewer')

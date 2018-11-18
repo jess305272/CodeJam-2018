@@ -80,3 +80,6 @@ class VideoCamera(object):
 
         if self.recordingThread != None:
             self.recordingThread.stop()
+
+    def take_snapshot(self):
+        pass

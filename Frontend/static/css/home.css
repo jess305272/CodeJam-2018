@@ -9,3 +9,11 @@
 #recorder {
     margin: 2em auto;
 }
+
+input.speak {
+    margin: 1em 0 !important;
+}
+
+.audio {
+    margin: 2em auto;
+}

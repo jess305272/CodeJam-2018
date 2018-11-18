@@ -29,10 +29,14 @@ def hello():
 def text2speech():
 	text = request.form.get('text', 'No text')
 	speech = myTTS.getSpeech(text)
-	myTTS.saveMp3(speech, 'output')
+	# myTTS.saveMp3(speech, 'output')
+
+	audioOutput = myTTS.getMp3(speech)
 
 	mixer.init()
-	mixer.music.load('output.mp3')
+	# sound = mixer.Sound(buffer=audioOutput)
+	# sound.play()
+	mixer.music.load(audioOutput)
 	mixer.music.play()
 	# return text
 	return render_template('home.html')
